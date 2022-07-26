@@ -18,7 +18,7 @@ class HelloWorldRenderer(private val mActivityContext: Context)  : GLSurfaceView
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
         mWidth = width
-        mWidth = height
+        mHeight = height
     }
     override fun onDrawFrame(gl: GL10) {
         GLES31.glClear(GLES31.GL_COLOR_BUFFER_BIT)
