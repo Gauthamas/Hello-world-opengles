@@ -9,16 +9,16 @@ import javax.microedition.khronos.opengles.GL10
 
 class HelloWorldRenderer(private val mActivityContext: Context)  : GLSurfaceView.Renderer {
     private lateinit var mTwodScreen: TwoDimensionalScreen
-    private var width = 0
-    private var height = 0
+    private var mWidth = 0
+    private var mHeight = 0
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
         GLES31.glClearColor(1f, 0f, 0f, 1f)
         mTwodScreen = TwoDimensionalScreen(mActivityContext)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
-        this.width = width
-        this.height = height
+        mWidth = width
+        mWidth = height
     }
     override fun onDrawFrame(gl: GL10) {
         GLES31.glClear(GLES31.GL_COLOR_BUFFER_BIT)
@@ -27,6 +27,6 @@ class HelloWorldRenderer(private val mActivityContext: Context)  : GLSurfaceView
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             isPortrait = false
         }
-        mTwodScreen.draw(gl, width, height, isPortrait)
+        mTwodScreen.draw(gl, mWidth, mHeight, isPortrait)
     }
 }
