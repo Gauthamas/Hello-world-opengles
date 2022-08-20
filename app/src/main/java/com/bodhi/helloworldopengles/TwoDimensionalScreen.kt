@@ -23,6 +23,15 @@ class TwoDimensionalScreen(private val mActivityContext: Context)  {
     private var mIsPortraitShaderHandle = 0
     private var mIsPortraitShader = 0
 
+    private var mViewWidthShader = 0.0f
+    private var mViewWidthShaderHandle = 0
+
+    private var mViewHeightShader = 0.0f
+    private var mViewHeightShaderHandle = 0
+
+    private var mAspectRatioShader = 512.0f/256.0f
+    private var mAspectRatioShaderHandle = 0
+
     private val mVertexCount = sTriangleCoords.size / COORDS_PER_VERTEX
     private val mVertexStride = COORDS_PER_VERTEX * 4
 
@@ -48,6 +57,9 @@ class TwoDimensionalScreen(private val mActivityContext: Context)  {
         mTextureCoordinateHandle = GLES31.glGetAttribLocation(mProgram, "a_TexCoordinate")
         mTextureUniformHandle = GLES31.glGetUniformLocation(mProgram, "u_Texture")
         mIsPortraitShaderHandle = GLES31.glGetUniformLocation(mProgram, "u_IsPortrait")
+        mViewHeightShaderHandle = GLES31.glGetUniformLocation(mProgram, "u_ViewHeight")
+        mViewWidthShaderHandle = GLES31.glGetUniformLocation(mProgram, "u_ViewWidth")
+        mAspectRatioShaderHandle = GLES31.glGetUniformLocation(mProgram, "u_AspectRatio")
 
         GLES31.glActiveTexture(GLES31.GL_TEXTURE0)
 
@@ -63,6 +75,12 @@ class TwoDimensionalScreen(private val mActivityContext: Context)  {
         }
 
         GLES31.glUniform1i(mIsPortraitShaderHandle, mIsPortraitShader)
+
+        GLES31.glUniform1f(mViewWidthShaderHandle, width.toFloat())
+
+        GLES31.glUniform1f(mViewHeightShaderHandle, height.toFloat())
+
+        GLES31.glUniform1f(mAspectRatioShaderHandle, mAspectRatioShader)
 
         GLES31.glEnableVertexAttribArray(mTextureCoordinateHandle)
 
